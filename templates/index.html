@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Traffic Violation Detection</title>
+<link rel="stylesheet" href="/static/style.css">
+<script>
+function startCamera() {
+    document.getElementById("liveCamera").src = "/video_feed";
+}
+function stopCamera() {
+    document.getElementById("liveCamera").src = "";
+}
+</script>
+</head>
+<body>
+
+<h1>Smart Traffic Violation Detection</h1>
+
+<!-- IMAGE UPLOAD DETECTION -->
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image">
+    <br><br>
+    <button type="submit">Detect Violation from Image</button>
+</form>
+
+<br><br>
+
+<!-- LIVE CAMERA SECTION -->
+<h2>Live Traffic Violation Detection</h2>
+<button onclick="startCamera()">
+    Detect Violation from Live Camera
+</button>
+<button onclick="stopCamera()">
+    Stop Camera
+</button>
+
+<br><br>
+<img id="liveCamera" width="800">
+
+<!-- RESULT SECTION -->
+{% if result %}
+<h2>Detection Result</h2>
+{% if image_name %}
+<img src="/static/uploads/{{ image_name }}" width="300">
+<br><br>
+{% endif %}
+<p>{{ result }}</p>
+{% endif %}
+
+<br><br>
+<a href="/history">
+    <button>View Detection History</button>
+</a>
+
+</body>
+</html>
